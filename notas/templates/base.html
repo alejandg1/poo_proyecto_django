@@ -39,7 +39,7 @@
               <a class="nav-link" href="#">Semestre</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Profesor</a>
+              <a class="nav-link" href={% url 'teachers'%}>Profesor</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Asignaturas</a>
@@ -57,7 +57,7 @@
                 <a class="nav-link" href={% url 'logout' %}>Salir</a>
               </li>
               <li class="nav-item nav-link">
-                Usuario: <span class="text-warning">{{user.username}}</span>
+                Usuario: <img alt="{{user.username}}" />
               </li>
             {% else %}
                   <li class="nav-item" ><a class="nav-link" href={% url 'login' %}>Iniciar Sesion</a></li>  

@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'notas',
-   
+
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -110,12 +110,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/' # url de staticos
+STATIC_URL = '/static/'  # url de staticos
 # carpeta de archivos staticos
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # carpeta de achivos de Imagenes
-MEDIA_ROOT = os.path.join('media')
-MEDIA_URL = '/media/' # url de imagenes
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'  # url de imagenes
 # redirigir a la pagina de login
 LOGIN_URL = '/login'
 
