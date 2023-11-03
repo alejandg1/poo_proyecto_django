@@ -1,20 +1,38 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
-
-
-class custom_user(User):
-    photo = models.ImageField(upload_to='images', blank=False, null=False)
-
-    class Meta:
-        verbose_name = ('custom_user')
-        verbose_name_plural = ('custom_users')
-        ordering = ('-username',)
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='images', blank=False, null=False)
+    photo = models.ImageField(upload_to='images/', blank=False, null=False)
+
+
+class Faculty(models.Model):
+    name = models.CharField(verbose_name="name", max_length=200)
+    code = models.CharField(verbose_name="code", max_length=20)
+    is_active = models.BooleanField(verbose_name="is_active", default=True)
+
+    class Meta:
+        verbose_name = ('Faculty')
+        verbose_name_plural = ('Faculties')
+        ordering = ('name',)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class carrer(models.Model):
+    codigo_carrera = models.CharField(verbose_name="code", max_length=20)
+    nombre = models.CharField(verbose_name="name", max_length=200)
+    Facultad = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = ('carrer')
+        verbose_name_plural = ('carrers')
+        ordering = ('nombre',)
+
+    def __str__(self):
+        return f"{self.nombre}"
 
 
 class Teacher(models.Model):
