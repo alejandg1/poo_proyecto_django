@@ -22,21 +22,14 @@ def register(request):
     else:
         if request.POST['password1'] == request.POST['password2']:
             try:
-                # form = regist(request.POST, request.FILES)
-                # if form.is_valid():
-                #     user = form.save()
-                #     profile = UserProfile(
-                #         user=user, photo=request.FILES['photo'])
-                #     profile.save()
-                #     login(request, user)
-                #     return redirect('home')
                 user = User.objects.create_user(
                     username=request.POST['username'],
                     password=request.POST['password1'])
                 user.save()
-                login(request, user)  # crea una cooki del usuario registrado
                 profile = UserProfile(user=user, photo=request.POST['photo'])
                 profile.save()
+                # crea una cooki del usuario registrado
+                login(request, user)
 
                 return redirect('home')
             except IntegrityError:

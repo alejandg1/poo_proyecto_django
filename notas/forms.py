@@ -1,11 +1,11 @@
 from django.forms import ModelForm
-from .models import Student, Facultad, UserProfile, Teacher, custom_user
+from .models import Student, Facultad, UserProfile, Teacher
 
 
 class profileForm(ModelForm):
     class Meta:
-        model = custom_user
-        fields = ['username', 'password', 'photo']
+        model = UserProfile
+        fields = ['photo']
 
 
 class StudentForm(ModelForm):

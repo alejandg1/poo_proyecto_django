@@ -57,7 +57,7 @@
                 <a class="nav-link" href={% url 'logout' %}>Salir</a>
               </li>
               <li class="nav-item nav-link">
-                Usuario: <img alt="{{user.username}}" />
+                Usuario: <img alt="{{user.username}}" src="{{profile.photo}}" />
               </li>
             {% else %}
                   <li class="nav-item" ><a class="nav-link" href={% url 'login' %}>Iniciar Sesion</a></li>  
