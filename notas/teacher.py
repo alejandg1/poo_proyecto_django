@@ -122,7 +122,7 @@ def delete_teacher(request, id):
             return render(request, 'teachers/delete_teacher.html', context)
         else:
             teacher.delete()
-            return redirect('students')
+            return redirect('teachers')
     except:
         context = {'title': 'Datos del Docente',
                    'teacher': teacher, 'error': 'Error al eliminar Docente'}

@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Student, Facultad, UserProfile, Teacher
+from .models import Student, Faculty, UserProfile, Teacher
 
 
 class profileForm(ModelForm):
@@ -22,5 +22,5 @@ class TeacherForm(ModelForm):
 
 class FacultadForm(ModelForm):
     class Meta:
-        model = Facultad
-        fields = ['description', 'isactive']
+        model = Faculty
+        fields = ['name', 'code', 'is_active']

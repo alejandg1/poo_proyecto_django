@@ -68,31 +68,46 @@ class Student(models.Model):
         return f"{self.lastname} {self.firstname} -  {self.user.username}"
 
 
-class Facultad(models.Model):
-    description = models.CharField('Descripcion', max_length=200)
-    isactive = models.BooleanField('Estado', default=True)
-
-    class Meta:
-        verbose_name = ('Facultad')
-        verbose_name_plural = ('Facultades')
-        ordering = ('description',)
-
-    def __str__(self):
-        return f"{self.description}"
+class Subject(models.Model):
+    name = models.CharField(verbose_name="name", max_length=200)
+    code = models.CharField(verbose_name="code", max_length=20)
+    is_active = models.BooleanField(verbose_name="is_active", default=True)
+    teacher = models.ManyToManyField(Teacher, through='teacher_subject')
 
 
-class Carrera(models.Model):
-    facultad = models.ForeignKey(Facultad, on_delete=models.CASCADE)
-    description = models.CharField('Descripcion', max_length=200)
-    isactive = models.BooleanField('Estado', default=True)
+class teacher_subject(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
-    class Meta:
-        verbose_name = ('Carrera')
-        verbose_name_plural = ('Carreras')
-        ordering = ('description',)
 
-    def __str__(self):
-        return f"{self.description}"
+class Notas(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    n1 = models.IntegerField('n1', default=0)
+    n2 = models.IntegerField('n2', default=0)
+    n3 = models.IntegerField('n3', default=0)
+    n4 = models.IntegerField('n4', default=0)
+    ex1 = models.IntegerField('ex1', default=0)
+    ex2 = models.IntegerField('ex2', default=0)
+    p1 = models.IntegerField('p1', default=0)
+    p2 = models.IntegerField('p2', default=0)
+    final = models.IntegerField('final', default=0)
+    fecha = models.DateTimeField(auto_now_add=True)
+
+
+class paralell(models.Model):
+    name = models.CharField(verbose_name="name", max_length=200)
+    code = models.CharField(verbose_name="code", max_length=20)
+    is_active = models.BooleanField(verbose_name="is_active", default=True)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    student = models.ManyToManyField(Student, through='matricula')
+
+
+class matricula(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    paralell = models.ForeignKey(paralell, on_delete=models.CASCADE)
 
 # class Asignatura:
 #   pass

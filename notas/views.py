@@ -30,7 +30,6 @@ def register(request):
                 profile.save()
                 # crea una cooki del usuario registrado
                 login(request, user)
-
                 return redirect('home')
             except IntegrityError:
                 context = {'title': 'Registro de Usuario',
