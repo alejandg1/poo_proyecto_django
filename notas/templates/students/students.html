@@ -2,9 +2,9 @@
 {% load static%}
 {% block content %}
  <div class="container">
-    <div class="py-2 mt-2 border border-1 shadow rounded text-center bg-white">
-        <h1 class="fw-bold text-success">{{title}}</h1>
-     
+    <div class="py-2 mt-4 border border-1 shadow rounded text-center color">
+        <h1 class="fw-bold text-white text-success">{{title}}</h1>
+    
     </div>
     {% if error %}
       <div class="alert alert-danger alert-dismissible fade show text-white" role="alert">
@@ -19,32 +19,27 @@
             
             <form action="" style="max-width: 450px;">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar x apellido o nombre..." name="q" value="{{ request.GET.q }}">
-                    <button class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-title="Escriba parte del apellido o nombre y click en buscar">
+                    <input type="text" size="100" class="form-control" placeholder="Buscar por apellido o nombre..." name="q" value="{{ request.GET.q }}">
+                    <button class="btn botones text-white" data-bs-toggle="tooltip" data-bs-title="Escriba parte del apellido o nombre y click en buscar">
                         Buscar
                     </button>
                 </div>
             </form>
-            <div class="m-2">
-              <a href="{% url 'create_student' %}" class="btn btn-outline-success " data-bs-toggle="tooltip" data-bs-title="Ingresar un nuevo estudiante">
-                  Registrar Estudiante
-              </a>
-            </div>
         </div>
   </div>
 
-  <div class="table-responsive">
-     <table class="table table-hover  table-fluid">
-    <thead class="text-center text-light table-success">
+  <div class="table-responsive mt-3">
+     <table class="table table-borderless table-fluid">
+    <thead class="text-center text-light ">
       <tr > 
         <th>Nombres</th>
         <th>Apellidos</th>
-        <th>Fecha Graduacion</th>
+        <th>Fecha Graduación</th>
         <th>Graduado</th>
         <th>Acciones</th>
       </tr>
     </thead>
-    <tbody class="table-primary">
+    <tbody>
       {% for student in students %}
       
       <tr>
@@ -78,7 +73,7 @@
       </tr>
       {% empty %}
       <tr>
-         <td colspan="5" class="text-danger fw-bold h3 text-center">
+         <td colspan="5" class="fw-bold h3 text-center">
             <div class="py-2 mt-2 border border-1 shadow rounded text-center">
               ¡No se encontraron datos que cumplan los criterios de búsqueda...!
             </div>   
@@ -88,7 +83,7 @@
     </tbody>
      </table>
   </div>
- 
+
   {% if paginator.num_pages > 1 %}
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
@@ -98,11 +93,17 @@
         {% endfor %}
 
         <li class="page-item">
-            <a class="page-link text-danger fw-bold" href="{% url 'students' %}?page={{ paginator.num_pages }}">&raquo;</a>
+            <a class="page-link fw-bold" href="{% url 'students' %}?page={{ paginator.num_pages }}">&raquo;</a>
         </li>
     </ul>
   {% endif %}
+  <div class="m-2">
+    <a href="{% url 'create_student' %}" class="btn color text-white" data-bs-toggle="tooltip" data-bs-title="Ingresar un nuevo estudiante">
+        Registrar Estudiante
+    </a>
+  </div>
 </div>
+
 <!-- ventana modal . -->
 <div class="modal fade" id="studentDetailsModal" tabindex="-1" role="dialog" aria-labelledby="studentDetailsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -124,9 +125,9 @@
 
         </p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
+      {% comment %} <div class="modal-footer">
+        <button type="button" class="btn botones text-white" data-bs-dismiss="modal">Cancelar</button>
+      </div> {% endcomment %}
     </div>
   </div>
 </div>
@@ -146,25 +147,26 @@
       // Muestra los detalles en el modal
       document.getElementById('studentDetailsContent').innerHTML = `
       <div class="container">
-  
-         <form action="/students/${id}/" method="POST" class="m-4"> 
-              {% csrf_token %}
-              <div class="row text-center align-content-center flex-column  g-2">
-                
-                  <button class="btn btn-outline-success mx-2" type="submit">¿Desea Graduar al Estudiante?</button>
-                  <h2>${nombre} ${apellido}<h2>
-              </div>
-              
-          </form>
+        <div class="modal-footer d-flex align-items-center justify-content-between">
+          
+          <form action="/students/${id}/" method="POST" class="m-4"> 
+            {% csrf_token %}
+            <div class="row text-center align-content-center flex-column  g-2">
+                <h1 class="fw-bold text-black text-success">¿Desea Graduar al Estudiante?</h1>
+                <h3>${nombre} ${apellido}<h2>
+            </div>
+            <button class="btn color text-white mx-2" type="submit">Graduar estudiante</button>
+            <button type="button" class="btn botones text-white" data-bs-dismiss="modal">Cancelar</button>
+        </form>
+        </div>
+          
       
       </div>
       `
       ;
 
       // Abre el modal
-      new bootstrap.Modal(document.getElementById('studentDetailsModal')).show(
-
-      );
+      new bootstrap.Modal(document.getElementById('studentDetailsModal')).show();
     }
   });
 

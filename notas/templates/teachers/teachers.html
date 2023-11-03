@@ -2,8 +2,8 @@
 {% load static%}
 {% block content %}
 <div class="container">
-  <div class="py-2 mt-2 border border-1 shadow rounded text-center bg-white">
-    <h1 class="fw-bold text-success">{{title}}</h1>
+  <div class="py-2 mt-2 border border-1 shadow rounded text-center color">
+    <h1 class="fw-bold text-white">{{title}}</h1>
 
   </div>
   {% if error %}
@@ -19,33 +19,27 @@
 
       <form action="" style="max-width: 450px;">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Buscar x apellido o nombre..." name="q"
+          <input type="text" size="100" class="form-control" placeholder="Buscar por apellido o nombre..." name="q"
             value="{{ request.GET.q }}">
-          <button class="btn btn-outline-success" data-bs-toggle="tooltip"
+          <button class="btn botones text-white" data-bs-toggle="tooltip"
             data-bs-title="Escriba parte del apellido o nombre y click en buscar">
             Buscar
           </button>
         </div>
       </form>
-      <div class="m-2">
-        <a href="{% url 'create_teacher' %}" class="btn btn-outline-success " data-bs-toggle="tooltip"
-          data-bs-title="Ingresar un nuevo docente">
-          Registrar Docente
-        </a>
-      </div>
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-hover  table-fluid">
-      <thead class="text-center text-light table-success">
+  <div class="table-responsive mt-3">
+    <table class="table table-borderless table-fluid">
+      <thead class="text-center text-light">
         <tr>
           <th>Nombres</th>
           <th>Apellidos</th>
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody class="table-primary">
+      <tbody>
         {% for teacher in teachers %}
 
         <tr>
@@ -66,7 +60,7 @@
         </tr>
         {% empty %}
         <tr>
-          <td colspan="5" class="text-danger fw-bold h3 text-center">
+          <td colspan="5" class="fw-bold h3 text-center">
             <div class="py-2 mt-2 border border-1 shadow rounded text-center">
               ¡No se encontraron datos que cumplan los criterios de búsqueda...!
             </div>
@@ -86,11 +80,18 @@
     {% endfor %}
 
     <li class="page-item">
-      <a class="page-link text-danger fw-bold" href="{% url 'teachers' %}?page={{ paginator.num_pages }}">&raquo;</a>
+      <a class="page-link fw-bold" href="{% url 'teachers' %}?page={{ paginator.num_pages }}">&raquo;</a>
     </li>
   </ul>
   {% endif %}
+  <div class="m-2">
+    <a href="{% url 'create_teacher' %}" class="btn color text-white" data-bs-toggle="tooltip"
+      data-bs-title="Ingresar un nuevo docente">
+      Registrar Docente
+    </a>
+  </div>
 </div>
+
 <!-- ventana modal . -->
 <div class="modal fade" id="studentDetailsModal" tabindex="-1" role="dialog" aria-labelledby="studentDetailsModalLabel"
   aria-hidden="true">
@@ -110,16 +111,14 @@
       <div class="modal-body">
         <!-- Aquí mostrarás los detalles del estudiante -->
         <p id="studentDetailsContent">
-
         </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
-<script>
+
+
+{% comment %} <script>
   // Escuchar clics en el botón "Mostrar más detalles"
   document.addEventListener('click', function (event) {
     if (event.target.classList.contains('show-details')) {
@@ -135,16 +134,18 @@
       // Muestra los detalles en el modal
       document.getElementById('studentDetailsContent').innerHTML = `
       <div class="container">
-  
-         <form action="/students/${id}/" method="POST" class="m-4"> 
-              {% csrf_token %}
-              <div class="row text-center align-content-center flex-column  g-2">
+        <div class="modal-footer d-flex align-items-center justify-content-between">
+          <form action="/students/${id}/" method="POST" class="m-4"> 
+            {% csrf_token %}
+            <div class="row text-center align-content-center flex-column  g-2">
                 
-                  <button class="btn btn-outline-success mx-2" type="submit">¿Desea Graduar al Estudiante?</button>
-                  <h2>${nombre} ${apellido}<h2>
-              </div>
-              
-          </form>
+                <button class="btn btn-outline-success mx-2" type="submit">¿Desea Graduar al Estudiante?</button>
+                <h2>${nombre} ${apellido}<h2>
+                  <button class="btn color text-white mx-2" type="submit">Graduar estudiante</button>
+            </div>
+            
+        </form>
+        </div> 
       
       </div>
       `
@@ -156,7 +157,5 @@
       );
     }
   });
-
-
-</script>
+</script> {% endcomment %}
 {% endblock content %}
