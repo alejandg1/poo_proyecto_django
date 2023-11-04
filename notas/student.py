@@ -15,13 +15,14 @@ def init(request):
         q = request.GET.get('q')  # ver
         if q:
             students = (Student.objects.filter(
-                user=request.user, lastname__icontains=q) or
+                lastname__icontains=q) or
                 Student.objects.filter
-                (user=request.user, firstname__icontains=q))
+                (firstname__icontains=q))
         else:
-            students = Student.objects.filter(user=request.user)
+            students = Student.objects.all()
             # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
+        print(students)
         paginator = Paginator(students, 2)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)

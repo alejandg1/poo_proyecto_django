@@ -18,7 +18,7 @@ class Faculty(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} {self.code} {self.is_active}"
 
 
 class carrer(models.Model):

@@ -12,13 +12,14 @@ def init(request):
         q = request.GET.get('q')  # ver
         if q:
             teachers = (Teacher.objects.filter(
-                user=request.user, lastname__icontains=q) or
+                lastname__icontains=q) or
                 Teacher.objects.filter
-                (user=request.user, firstname__icontains=q))
+                (firstname__icontains=q))
         else:
-            teachers = Teacher.objects.filter(user=request.user)
+            teachers = Teacher.objects.all()
         # Crea un paginador con los estudiantes
         paginator = Paginator(teachers, 2)
+        print(teachers)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)
         # Obtén los libros de la página actual

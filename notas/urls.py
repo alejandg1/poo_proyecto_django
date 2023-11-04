@@ -2,6 +2,7 @@
 from django.urls import path
 from . import teacher
 from . import student
+from . import facultad
 from . import views
 urlpatterns = [
     path('', views.home, name='home'),
@@ -16,12 +17,17 @@ urlpatterns = [
 
     path('teachers/', teacher.init, name='teachers'),
     path('teachers/create/', teacher.create_teacher, name='create_teacher'),
-    # path('teacher/<int:id>/',
-    #      teacher.detail_teacher, name='detail_teacher'),
     path('teachers/update/<int:id>/',
          teacher.update_teacher, name='update_teacher'),
     path('teachers/delete/<int:id>/',
          teacher.delete_teacher, name='delete_teacher'),
+
+    path('faculty/', facultad.init, name='faculty'),
+    path('faculty/create/', facultad.create_faculty, name='create_faculty'),
+    path('faculty/update/<int:id>/',
+         facultad.update_faculty, name='update_faculty'),
+    path('faculty/delete/<int:id>/',
+         facultad.delete_faculty, name='delete_faculty'),
 
     path('register/', views.register, name='register'),
     path('login/', views.iniciarSesion, name='login'),

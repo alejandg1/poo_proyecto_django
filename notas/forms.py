@@ -23,4 +23,4 @@ class TeacherForm(ModelForm):
 class FacultadForm(ModelForm):
     class Meta:
         model = Faculty
-        fields = ['name', 'code', 'is_active']
+        fields = ['name', 'code']

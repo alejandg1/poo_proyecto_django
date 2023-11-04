@@ -33,23 +33,21 @@
     <thead class="text-center text-light ">
       <tr > 
         <th>Nombre</th>
-        <th>estududiantes</th>
+        <th>codigo</th>
+        <th>acciones</th>
       </tr>
     </thead>
     <tbody>
       {% for facultad in facultades %}
       
       <tr>
-        <td>{{student.name|upper}}</td>
-        <td>{{student.estudents|upper}}</td>
+        <td>{{facultad.name|upper}}</td>
+        <td>{{facultad.code|upper}}</td>
 
-            <a class="show-details" href="#" data-bs-toggle="tooltip" data-bs-title="Graduar Estudiante"
-              data-studentid="{{ student.id }}|{{ student.firstname }}|{{ student.lastname }}|{{ student.graduate }}" data-bs-toggle="modal" data-bs-target="#studentDetailsModal">
-              👨‍🎓
-            </a>
       
-          <a href="{% url 'update_faculty' student.id %}" data-bs-toggle="tooltip" data-bs-title="Editar el estudiante">📝</a>
-          <a href="{% url 'delete_faculty' student.id %}" data-bs-toggle="tooltip" data-bs-title="Eliminar el estudiante">❌</a>
+        <td>
+          <a href="{% url 'update_faculty' facultad.id %}" data-bs-toggle="tooltip" data-bs-title="Editar facultad">📝</a>
+          <a href="{% url 'delete_faculty' facultad.id %}" data-bs-toggle="tooltip" data-bs-title="Eliminar facultad">❌</a>
         </td>
       </tr>
       {% empty %}
@@ -69,17 +67,17 @@
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-                <a class="page-link text-success fw-bold" href="{% url 'students' %}?page={{ page_num }}">{{ page_num }}</a>
+                <a class="page-link text-success fw-bold" href="{% url 'faculty' %}?page={{ page_num }}">{{ page_num }}</a>
             </li>
         {% endfor %}
 
         <li class="page-item">
-            <a class="page-link fw-bold" href="{% url 'students' %}?page={{ paginator.num_pages }}">&raquo;</a>
+            <a class="page-link fw-bold" href="{% url 'faculty' %}?page={{ paginator.num_pages }}">&raquo;</a>
         </li>
     </ul>
   {% endif %}
   <div class="m-2">
-    <a href="{% url 'create_student' %}" class="btn color text-white" data-bs-toggle="tooltip" data-bs-title="Ingresar un nueva facultad">
+    <a href="{% url 'create_faculty' %}" class="btn color text-white" data-bs-toggle="tooltip" data-bs-title="Ingresar un nueva facultad">
         crear facultad
     </a>
   </div>
@@ -106,53 +104,9 @@
 
         </p>
       </div>
-      {% comment %} <div class="modal-footer">
-        <button type="button" class="btn botones text-white" data-bs-dismiss="modal">Cancelar</button>
-      </div> {% endcomment %}
     </div>
   </div>
 </div>
-<script>
-  // Escuchar clics en el botón "Mostrar más detalles"
-  document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('show-details')) {
-      event.preventDefault();
-      let student = (event.target.getAttribute('data-studentid'));
-      //"1|miguel|vera"
-      student = student.split("|")
-      console.log(student)
-      let nombre = student[1]
-      let id = parseInt(student[0])
-      console.log(id)
-      let apellido = student[2]
-      // Muestra los detalles en el modal
-      document.getElementById('studentDetailsContent').innerHTML = `
-      <div class="container">
-        <div class="modal-footer d-flex align-items-center justify-content-between">
-          
-          <form action="/students/${id}/" method="POST" class="m-4"> 
-            {% csrf_token %}
-            <div class="row text-center align-content-center flex-column  g-2">
-                <h1 class="fw-bold text-black text-success">¿Desea Graduar al Estudiante?</h1>
-                <h3>${nombre} ${apellido}<h2>
-            </div>
-            <button class="btn color text-white mx-2" type="submit">Graduar estudiante</button>
-            <button type="button" class="btn botones text-white" data-bs-dismiss="modal">Cancelar</button>
-        </form>
-        </div>
-          
-      
-      </div>
-      `
-      ;
-
-      // Abre el modal
-      new bootstrap.Modal(document.getElementById('studentDetailsModal')).show();
-    }
-  });
-
-  
-</script>
 {% endblock content %}
 
 
