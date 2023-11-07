@@ -1,7 +1,6 @@
-from datetime import datetime
 from django.shortcuts import render, redirect
-from .forms import StudentForm, FacultadForm
-from .models import Faculty, Student
+from .forms import FacultadForm
+from .models import Faculty
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
@@ -22,7 +21,6 @@ def init(request):
             # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
         paginator = Paginator(Faculties, 2)
-        print(Faculties)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)
         # Obtén los libros de la página actual

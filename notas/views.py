@@ -52,7 +52,9 @@ def iniciarSesion(request):
     else:
         print(request.POST)
         user = authenticate(
-            request, username=request.POST['username'], password=request.POST['password'])
+            request,
+            username=request.POST['username'],
+            password=request.POST['password'])
         if user is None:
             context = {'title': 'Iniciar Sesion', 'form': AuthenticationForm,
                        'error': 'Usuario o password incorrecto'}

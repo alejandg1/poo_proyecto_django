@@ -4,7 +4,10 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='images/', blank=False, null=False)
+    photo = models.ImageField(upload_to='notas_user', blank=True, null=True)
+
+    def __str__(self):
+        return self.user
 
 
 class Faculty(models.Model):
@@ -32,7 +35,7 @@ class carrer(models.Model):
         ordering = ('nombre',)
 
     def __str__(self):
-        return f"{self.nombre}"
+        return f"{self.nombre, self.codigo_carrera}"
 
 
 class Teacher(models.Model):
@@ -74,6 +77,9 @@ class Subject(models.Model):
     is_active = models.BooleanField(verbose_name="is_active", default=True)
     teacher = models.ManyToManyField(Teacher, through='teacher_subject')
 
+    def __str__(self):
+        return f"{self.name, self.code, self.teacher}"
+
 
 class teacher_subject(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
@@ -94,27 +100,24 @@ class Notas(models.Model):
     final = models.IntegerField('final', default=0)
     fecha = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.student, self,Subject, self.final}"
+
 
 class paralell(models.Model):
     name = models.CharField(verbose_name="name", max_length=200)
     code = models.CharField(verbose_name="code", max_length=20)
     is_active = models.BooleanField(verbose_name="is_active", default=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     student = models.ManyToManyField(Student, through='matricula')
 
 
 class matricula(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
     paralell = models.ForeignKey(paralell, on_delete=models.CASCADE)
 
-# class Asignatura:
-#   pass
-# class profesor:
-#   pass
-# class Semestre:
-#   pass
-# class Notas:
-#   pass
-#   # guardar user: user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class semestre(models.Model):
+    pass
