@@ -32,6 +32,7 @@
      <table class="table table-borderless table-fluid">
     <thead class="text-center text-light ">
       <tr > 
+        <th>Foto</th>
         <th>Nombres</th>
         <th>Apellidos</th>
         <th>Fecha Graduación</th>
@@ -43,6 +44,7 @@
       {% for student in students %}
       
       <tr>
+        
         <td>{{student.firstname|upper}}</td>
         <td>{{student.lastname|upper}}</td>
         {% if student.graduate %}
@@ -88,7 +90,7 @@
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-                <a class="page-link text-success fw-bold" href="{% url 'students' %}?page={{ page_num }}">{{ page_num }}</a>
+                <a class="page-link text-white fw-bold" href="{% url 'students' %}?page={{ page_num }}">{{ page_num }}</a>
             </li>
         {% endfor %}
 
