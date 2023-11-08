@@ -49,10 +49,8 @@ def create_teacher(request):
         return render(request, 'teachers/create_teacher.html', context)
     else:
         try:
-            form = TeacherForm(request.POST)
-            print(form)
-            print(request.POST)
-            print(request.user)
+            form = TeacherForm(request.POST, request.FILES)
+            print(request.FILES)
             if form.is_valid():
                 teacher = form.save(commit=False)  # lo tiene en memoria
                 teacher.user = request.user
