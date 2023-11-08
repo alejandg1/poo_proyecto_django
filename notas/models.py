@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='notas_user', blank=True, null=True)
+    photo = models.ImageField(
+        upload_to='notas_userPhoto', blank=True, null=True)
 
     def __str__(self):
         return self.user
@@ -24,10 +25,21 @@ class Faculty(models.Model):
         return f"{self.name} {self.code} {self.is_active}"
 
 
-class carrer(models.Model):
+class Subject(models.Model):
+    name = models.CharField(verbose_name="name", max_length=200)
+    code = models.CharField(verbose_name="code", max_length=20)
+    semestre = models.IntegerField('semestre', default=1)
+    is_active = models.BooleanField(verbose_name="is_active", default=True)
+
+    def __str__(self):
+        return f"{self.name, self.code, self.teacher}"
+
+
+class Carrer(models.Model):
     codigo_carrera = models.CharField(verbose_name="code", max_length=20)
     nombre = models.CharField(verbose_name="name", max_length=200)
     Facultad = models.ForeignKey(Faculty, on_delete=models.CASCADE)
+    Subjects = models.ManyToManyField(Subject, default=None)
 
     class Meta:
         verbose_name = ('carrer')
@@ -38,10 +50,35 @@ class carrer(models.Model):
         return f"{self.nombre, self.codigo_carrera}"
 
 
+class Student(models.Model):
+    firstname = models.CharField(
+        'Nombres', max_length=200, null=False, blank=False)
+    lastname = models.CharField(
+        verbose_name="Apellidos", max_length=200, blank=False, null=False)
+    created = models.DateTimeField(auto_now_add=True)
+    dategraduate = models.DateTimeField(
+        'Fecha Graduacion', null=True, blank=True)
+    graduate = models.BooleanField('Graduado', default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    carrera = models.ForeignKey(Carrer, default=None, on_delete=models.PROTECT)
+    photo = models.ImageField(
+        upload_to='notas_studentPhoto', blank=True, null=True)
+
+    class Meta:
+        verbose_name = ('Estudiante')
+        verbose_name_plural = ('Estudiantes')
+        ordering = ('-lastname',)
+
+    def __str__(self):
+        return f"{self.lastname} {self.firstname} -  {self.user.username}"
+
+
 class Teacher(models.Model):
     firstname = models.CharField('Nombres', max_length=200)
     lastname = models.CharField(verbose_name="Apellidos", max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    photo = models.ImageField(
+        upload_to='notas_teacherPhoto', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
@@ -53,42 +90,24 @@ class Teacher(models.Model):
         return f"{self.lastname} {self.firstname} -  {self.user.username}"
 
 
-class Student(models.Model):
-    firstname = models.CharField('Nombres', max_length=200)
-    lastname = models.CharField(verbose_name="Apellidos", max_length=200)
-    created = models.DateTimeField(auto_now_add=True)
-    dategraduate = models.DateTimeField(
-        'Fecha Graduacion', null=True, blank=True)
-    graduate = models.BooleanField('Graduado', default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = ('Estudiante')
-        verbose_name_plural = ('Estudiantes')
-        ordering = ('-lastname',)
-
-    def __str__(self):
-        return f"{self.lastname} {self.firstname} -  {self.user.username}"
-
-
-class Subject(models.Model):
+class Paralell(models.Model):
     name = models.CharField(verbose_name="name", max_length=200)
     code = models.CharField(verbose_name="code", max_length=20)
     is_active = models.BooleanField(verbose_name="is_active", default=True)
-    teacher = models.ManyToManyField(Teacher, through='teacher_subject')
-
-    def __str__(self):
-        return f"{self.name, self.code, self.teacher}"
 
 
-class teacher_subject(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-
-
-class Notas(models.Model):
+class enrollment(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
+    fecha = models.DateTimeField(auto_now_add=True)
+    paralell = models.ForeignKey(Paralell, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f"{self.student, self.subject, self.teacher}"
+
+
+class calification(models.Model):
     n1 = models.IntegerField('n1', default=0)
     n2 = models.IntegerField('n2', default=0)
     n3 = models.IntegerField('n3', default=0)
@@ -97,27 +116,9 @@ class Notas(models.Model):
     ex2 = models.IntegerField('ex2', default=0)
     p1 = models.IntegerField('p1', default=0)
     p2 = models.IntegerField('p2', default=0)
+    re = models.IntegerField('re', default=0)
     final = models.IntegerField('final', default=0)
-    fecha = models.DateTimeField(auto_now_add=True)
+    enroll = models.OneToOneField(enrollment, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.student, self,Subject, self.final}"
-
-
-class paralell(models.Model):
-    name = models.CharField(verbose_name="name", max_length=200)
-    code = models.CharField(verbose_name="code", max_length=20)
-    is_active = models.BooleanField(verbose_name="is_active", default=True)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    student = models.ManyToManyField(Student, through='matricula')
-
-
-class matricula(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
-    paralell = models.ForeignKey(paralell, on_delete=models.CASCADE)
-
-
-class semestre(models.Model):
-    pass
+        return f"{self.p1, self.p2, self.final, self.enroll.__str__()}"
