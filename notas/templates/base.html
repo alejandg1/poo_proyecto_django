@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
     <link rel="stylesheet" href={% static 'css/estilos.css' %}>
-     <title>Registro Notas</title>
+      <title>Registro Notas</title>
     <!-- fuentes de google font -->
   </head>
   <body class="fondo">
     <div>
-         <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="container-fluid"  class="navbar">
         <a class="navbar-brand" href="#">DEVELOPERS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
               <a class="nav-link" href={% url 'students' %}>Estudiantes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href={%url 'faculty'%}>Facultad</a>
+              <a class="nav-link" href="#">Facultad</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Carrera</a>
@@ -66,21 +66,22 @@
           </ul>
         </div>
       </div>
-   </nav>
+    </nav>
     </div>
 
-   <!-- nav>ul>li*4>a -->
-   
-   {% block content %}
+    <!-- nav>ul>li*4>a -->
+    
+    {% block content %}
       
-   {% endblock content %}
-     <script src={% static 'js/bootstrap.min.js' %}> </script>
-     <script src={% static 'js/bootstrap.bundle.min.js' %}> </script>
-     <script>
+    {% endblock content %}
+    {% include 'footer.html' %}
+      <script src={% static 'js/bootstrap.min.js' %}> </script>
+      <script src={% static 'js/bootstrap.bundle.min.js' %}> </script>
+      <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl)
         })
-     </script>
- </body>
+      </script>
+  </body>
 </html>

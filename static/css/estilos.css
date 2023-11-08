@@ -31,3 +31,44 @@
 .tables{
   background: #F2DFBB !important; 
 }
+.pie-pagina{
+  width: 100%;
+  background-color: #BF702A;
+
+}
+
+.pie-pagina .grupo1{
+  padding: 45px 0px ;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+}
+.pie-pagina .grupo1 .box h2{
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+.pie-pagina .grupo1 .box p{
+  color: #efefef;
+  margin-bottom: 25px;
+}
+.pie-pagina .grupo2{
+  background-color: #a15e23;
+  padding: 15px 10px;
+  text-align: center;
+  color: #fff;
+}
+.pie-pagina .grupo2 small{
+  font-size: 15px;
+}
+@media screen and (max-width: 800px){
+  .pie-pagina .grupo1{
+    padding: 35px 0px;
+    width: 90%;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px
+  }
+}
