@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import FacultadForm
+from .forms import FacultyForm
 from .models import Faculty
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -47,11 +47,11 @@ def create_faculty(request):
     form = None
     if request.method == "GET":
         context = {'title': 'Crear Facultades',
-                   'form': FacultadForm(), 'error': ''}
+                   'form': FacultyForm(), 'error': ''}
         return render(request, 'facultad/create_faculty.html', context)
     else:
         try:
-            form = FacultadForm(request.POST)
+            form = FacultyForm(request.POST)
             if form.is_valid():
                 faculty = form.save(commit=False)  # lo tiene en memoria
                 faculty.save()  # lo guarda en la BD
@@ -75,12 +75,12 @@ def update_faculty(request, id):
     form = None
     print(faculty)
     if request.method == "GET":
-        form = FacultadForm(instance=faculty)
+        form = FacultyForm(instance=faculty)
         context = {'title': 'Editar Facultad', 'form': form, 'error': ''}
         return render(request, 'facultad/create_faculty.html', context)
     else:
         try:
-            form = FacultadForm(request.POST, instance=faculty)
+            form = FacultyForm(request.POST, instance=faculty)
             if form.is_valid():
                 form.save()
                 return redirect('faculty')

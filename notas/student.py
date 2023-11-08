@@ -65,7 +65,8 @@ def create_student(request):
                               'students/create_student.html',
                               {"form": form,
                                "error": "Error de datos invalidos."})
-        except:
+        except ValueError:
+            print(ValueError)
             return render(request,
                           'students/create_student.html',
                           {"form": form,
