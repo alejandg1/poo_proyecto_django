@@ -11,13 +11,13 @@ class profileForm(ModelForm):
 class StudentForm(ModelForm):
     class Meta:
         model = Student
-        fields = ['firstname', 'lastname', 'graduate']
+        fields = ['firstname', 'lastname', 'graduate', 'photo']
 
 
 class TeacherForm(ModelForm):
     class Meta:
         model = Teacher
-        fields = ['firstname', 'lastname']
+        fields = ['firstname', 'lastname', 'photo']
 
 
 class FacultadForm(ModelForm):
