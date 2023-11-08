@@ -1,9 +1,6 @@
 
 from django.urls import path
-from . import teacher
-from . import student
-from . import facultad
-from . import views
+from . import facultad, carrer, teacher, student, views, subjects
 urlpatterns = [
     path('', views.home, name='home'),
 
@@ -28,6 +25,21 @@ urlpatterns = [
          facultad.update_faculty, name='update_faculty'),
     path('faculty/delete/<int:id>/',
          facultad.delete_faculty, name='delete_faculty'),
+
+    path('carrer/', carrer.init, name='carrers'),
+    path('carrer/create/', carrer.create_carrer, name='create_carrer'),
+    path('carrer/update/<int:id>/',
+         carrer.update_carrer, name='update_carrer'),
+    path('carrer/delete/<int:id>/',
+         carrer.delete_carrer, name='delete_carrer'),
+
+
+    path('subject/', subjects.init, name='subjects'),
+    path('subject/create/', subjects.create_subject, name='create_subject'),
+    path('subject/update/<int:id>/',
+         subjects.update_subject, name='update_subject'),
+    path('subject/delete/<int:id>/',
+         subjects.delete_subject, name='delete_subject'),
 
     path('register/', views.register, name='register'),
     path('login/', views.iniciarSesion, name='login'),

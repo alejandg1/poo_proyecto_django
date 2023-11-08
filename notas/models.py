@@ -22,7 +22,7 @@ class Faculty(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name} {self.code} {self.is_active}"
+        return f"{self.name}"
 
 
 class Subject(models.Model):
@@ -32,14 +32,14 @@ class Subject(models.Model):
     is_active = models.BooleanField(verbose_name="is_active", default=True)
 
     def __str__(self):
-        return f"{self.name, self.code, self.teacher}"
+        return f"{self.name, self.code}"
 
 
 class Carrer(models.Model):
     codigo_carrera = models.CharField(verbose_name="code", max_length=20)
     nombre = models.CharField(verbose_name="name", max_length=200)
     Facultad = models.ForeignKey(Faculty, on_delete=models.CASCADE)
-    Subjects = models.ManyToManyField(Subject, default=None)
+    materias = models.ManyToManyField(Subject)
 
     class Meta:
         verbose_name = ('carrer')

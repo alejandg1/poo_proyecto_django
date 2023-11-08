@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="mt-4 border border-2 shadow rounded ">
+        <div class="py-2 border border-1 shadow rounded text-center color">
+           <h1 class="fw-bold text-white text-success">{{title}}</h1>
+        </div>
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show text-white" role="alert">
+            <strong> ¡ {{error}}</strong>, Verifique los datos...!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %} 
+        <form method="POST" class="m-4"> 
+            {% csrf_token %}
+            <div>
+                <h2 class="fw-bold text-center mt-3">¿Desea eliminar la carrera?</h2> 
+                <h2 class="fw-bold text-black text-center mt-3">{{carrera.name}} {{carrera.Faculty}}</h2>
+                <div class="mt-4 d-flex justify-content-between flex-wrap">
+                    <button class="btn color text-white"  type="submit">Eliminar carrera</button>
+                    <a class="btn botones text-white ml-2" href="/faculty/">Cancelar</a>
+                </div>
+            </div>
+        
+           
+           
+        </form>
+    </div>
+</div>
+  
+ {% endblock content %}
+
+
