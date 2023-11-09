@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(
-        upload_to='notas_userPhoto', blank=True, null=True)
+    photo = models.ImageField(default='../media/default_photo.png',
+                              upload_to='userPhoto', blank=True, null=True)
 
     def __str__(self):
-        return f"user: {self.user}, photo: {self.photo}"
+        return f"{self.user} {self.photo}"
 
 
 class Faculty(models.Model):
@@ -61,8 +61,8 @@ class Student(models.Model):
     graduate = models.BooleanField('Graduado', default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     carrera = models.ForeignKey(Carrer, default=None, on_delete=models.PROTECT)
-    photo = models.ImageField(
-        upload_to='studentPhoto/', blank=True, null=True)
+    photo = models.ImageField(default='../media/default_photo.png',
+                              upload_to='studentPhoto', blank=True, null=True)
 
     class Meta:
         verbose_name = ('Student')
@@ -77,8 +77,8 @@ class Teacher(models.Model):
     firstname = models.CharField('Nombres', max_length=200)
     lastname = models.CharField(verbose_name="Apellidos", max_length=200)
     created = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField(
-        upload_to='teacherPhoto/', blank=True, null=True)
+    photo = models.ImageField(default='../media/default_photo.png',
+                              upload_to='teacherPhoto', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

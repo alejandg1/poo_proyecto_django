@@ -54,7 +54,7 @@ def create_student(request):
         return render(request, 'students/create_student.html', context)
     else:
         try:
-            form = StudentForm(request.POST)
+            form = StudentForm(request.POST, request.FILES)
             if form.is_valid():
                 student = form.save(commit=False)  # lo tiene en memoria
                 student.user = request.user
@@ -100,7 +100,7 @@ def update_student(request, id):
         return render(request, 'students/create_student.html', context)
     else:
         try:
-            form = StudentForm(request.POST, instance=student)
+            form = StudentForm(request.POST, request.FILES, instance=student)
             if form.is_valid():
                 form.save()
                 return redirect('students')
@@ -126,7 +126,8 @@ def delete_student(request, id):
         else:
             student.delete()
             return redirect('students')
-    except:
+    except ValueError:
+        print(ValueError)
         context = {'title': 'Datos del Estudiante',
                    'student': student, 'error': 'Error al eliminar estudiante'}
         return render(request, 'students/delete_student.html', context)
