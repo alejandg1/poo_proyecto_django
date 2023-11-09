@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Student, Faculty, enrollment, UserProfile, Teacher, Carrer, Subject, calification
+from .models import Student, Faculty, enrollment, UserProfile, Teacher, Carrer, Subject, Calification
 
 
 class profileForm(ModelForm):
@@ -46,5 +46,5 @@ class Enrollform(ModelForm):
 
 class calificationForm(ModelForm):
     class Meta:
-        mode = calification
+        model = Calification
         fields = ['enroll', 'n1', 'n2', 'ex1', 'n3', 'n4', 'ex2', 're']

@@ -8,7 +8,7 @@ class UserProfile(models.Model):
         upload_to='notas_userPhoto', blank=True, null=True)
 
     def __str__(self):
-        return self.user
+        return f"user: {self.user}, photo: {self.photo}"
 
 
 class Faculty(models.Model):
@@ -22,7 +22,7 @@ class Faculty(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"name: {self.name}"
 
 
 class Subject(models.Model):
@@ -32,7 +32,7 @@ class Subject(models.Model):
     is_active = models.BooleanField(verbose_name="is_active", default=True)
 
     def __str__(self):
-        return f"{self.name, self.code}"
+        return f"{self.name}"
 
 
 class Carrer(models.Model):
@@ -47,7 +47,7 @@ class Carrer(models.Model):
         ordering = ('nombre',)
 
     def __str__(self):
-        return f"{self.nombre, self.codigo_carrera}"
+        return f"nombre: {self.nombre}"
 
 
 class Student(models.Model):
@@ -70,7 +70,7 @@ class Student(models.Model):
         ordering = ('-lastname',)
 
     def __str__(self):
-        return f"{self.lastname} {self.firstname} -  {self.user.username}"
+        return f"{self.firstname} {self.lastname}"
 
 
 class Teacher(models.Model):
@@ -87,7 +87,7 @@ class Teacher(models.Model):
         ordering = ('-lastname',)
 
     def __str__(self):
-        return f"{self.lastname} {self.firstname} -  {self.user.username}"
+        return f"{self.lastname} {self.firstname}"
 
 
 # class Paralell(models.Model):
@@ -105,10 +105,10 @@ class enrollment(models.Model):
         'paralell', max_length=20, blank=False, null=False)
 
     def __str__(self):
-        return f"{self.student, self.subject, self.teacher}"
+        return f"student: {self.student} / subject:{self.subject.name} / teacher:{self.teacher}"
 
 
-class calification(models.Model):
+class Calification(models.Model):
     n1 = models.IntegerField('n1', default=0)
     n2 = models.IntegerField('n2', default=0)
     n3 = models.IntegerField('n3', default=0)
@@ -128,4 +128,4 @@ class calification(models.Model):
         super().save(self, *args, **kwargs)
 
     def __str__(self):
-        return f"{self.p1, self.p2, self.final, self.enroll.__str__()}"
+        return f"p1: {self.p1} / p2:{self.p2} / final:{self.final} / enroll:{ self.enroll.__str__()}"
