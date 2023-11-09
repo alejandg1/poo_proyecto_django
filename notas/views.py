@@ -26,7 +26,7 @@ def register(request):
                     username=request.POST['username'],
                     password=request.POST['password1'])
                 user.save()
-                profile = UserProfile(user=user, photo=request.POST['photo'])
+                profile = UserProfile(user=user, photo=request.FILES['photo'])
                 profile.save()
                 # crea una cooki del usuario registrado
                 login(request, user)
@@ -55,6 +55,8 @@ def iniciarSesion(request):
             request,
             username=request.POST['username'],
             password=request.POST['password'])
+        profile = UserProfile.objects.filter(user=user.id)
+        print(profile)
         if user is None:
             context = {'title': 'Iniciar Sesion', 'form': AuthenticationForm,
                        'error': 'Usuario o password incorrecto'}

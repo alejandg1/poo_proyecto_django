@@ -35,7 +35,6 @@
       <thead class="text-center text-light">
         <tr>
           <th>Foto</th>
-          <th>Grado académico</th>
           <th>Nombres</th>
           <th>Apellidos</th>
           <th>Acciones</th>
@@ -45,7 +44,7 @@
         {% for teacher in teachers %}
 
         <tr>
-          <td>{{teacher.photo}}</td>
+          <td><img src="{{teacher.photo.url}}" style="width:100px; heigth:100px"></td>
           <td>{{teacher.firstname|upper}}</td>
           <td>{{teacher.lastname|upper}}</td>
 

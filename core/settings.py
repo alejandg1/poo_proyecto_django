@@ -115,7 +115,7 @@ STATIC_URL = '/static/'  # url de staticos
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # carpeta de achivos de Imagenes
 MEDIA_URL = '/media/'  # url de imagenes
-MEDIA_ROOT = (os.path.join(BASE_DIR, 'media'),)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # redirigir a la pagina de login
 LOGIN_URL = '/login'
 

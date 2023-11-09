@@ -50,7 +50,6 @@ def create_teacher(request):
     else:
         try:
             form = TeacherForm(request.POST, request.FILES)
-            print(request.FILES)
             if form.is_valid():
                 teacher = form.save(commit=False)  # lo tiene en memoria
                 teacher.user = request.user
@@ -96,7 +95,7 @@ def update_teacher(request, id):
         return render(request, 'teachers/create_teacher.html', context)
     else:
         try:
-            form = TeacherForm(request.POST, instance=teacher)
+            form = TeacherForm(request.POST, request.FILES, instance=teacher)
             if form.is_valid():
                 form.save()
                 return redirect('teachers')
