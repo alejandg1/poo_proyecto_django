@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Student, Faculty, UserProfile, Teacher, Carrer, Subject
+from .models import Student, Faculty, enrollment, UserProfile, Teacher, Carrer, Subject, Calification
 
 
 class profileForm(ModelForm):
@@ -29,10 +29,22 @@ class FacultyForm(ModelForm):
 class SubjectForm(ModelForm):
     class Meta:
         model = Subject
-        fields = ['name', 'code']
+        fields = ['name', 'code', 'semestre']
 
 
 class CarrerForm(ModelForm):
     class Meta:
         model = Carrer
         fields = ['nombre', 'codigo_carrera', 'Facultad', 'materias']
+
+
+class Enrollform(ModelForm):
+    class Meta:
+        model = enrollment
+        fields = ['student', 'subject', 'teacher', 'paralell']
+
+
+class calificationForm(ModelForm):
+    class Meta:
+        model = Calification
+        fields = ['enroll', 'n1', 'n2', 'ex1', 'n3', 'n4', 'ex2', 're']

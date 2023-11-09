@@ -8,7 +8,7 @@ class UserProfile(models.Model):
         upload_to='notas_userPhoto', blank=True, null=True)
 
     def __str__(self):
-        return self.user
+        return f"user: {self.user}, photo: {self.photo}"
 
 
 class Faculty(models.Model):
@@ -22,7 +22,7 @@ class Faculty(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"name: {self.name}"
 
 
 class Subject(models.Model):
@@ -32,7 +32,7 @@ class Subject(models.Model):
     is_active = models.BooleanField(verbose_name="is_active", default=True)
 
     def __str__(self):
-        return f"{self.name, self.code}"
+        return f"{self.name}"
 
 
 class Carrer(models.Model):
@@ -47,7 +47,7 @@ class Carrer(models.Model):
         ordering = ('nombre',)
 
     def __str__(self):
-        return f"{self.nombre, self.codigo_carrera}"
+        return f"nombre: {self.nombre}"
 
 
 class Student(models.Model):
@@ -62,15 +62,15 @@ class Student(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     carrera = models.ForeignKey(Carrer, default=None, on_delete=models.PROTECT)
     photo = models.ImageField(
-        upload_to='notas_studentPhoto', blank=True, null=True)
+        upload_to='studentPhoto/', blank=True, null=True)
 
     class Meta:
-        verbose_name = ('Estudiante')
-        verbose_name_plural = ('Estudiantes')
+        verbose_name = ('Student')
+        verbose_name_plural = ('Students')
         ordering = ('-lastname',)
 
     def __str__(self):
-        return f"{self.lastname} {self.firstname} -  {self.user.username}"
+        return f"{self.firstname} {self.lastname}"
 
 
 class Teacher(models.Model):
@@ -78,7 +78,7 @@ class Teacher(models.Model):
     lastname = models.CharField(verbose_name="Apellidos", max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(
-        upload_to='notas_teacherPhoto', blank=True, null=True)
+        upload_to='teacherPhoto/', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
@@ -87,13 +87,13 @@ class Teacher(models.Model):
         ordering = ('-lastname',)
 
     def __str__(self):
-        return f"{self.lastname} {self.firstname} -  {self.user.username}"
+        return f"{self.lastname} {self.firstname}"
 
 
-class Paralell(models.Model):
-    name = models.CharField(verbose_name="name", max_length=200)
-    code = models.CharField(verbose_name="code", max_length=20)
-    is_active = models.BooleanField(verbose_name="is_active", default=True)
+# class Paralell(models.Model):
+#     name = models.CharField(verbose_name="name", max_length=200)
+#     code = models.CharField(verbose_name="code", max_length=20)
+#     is_active = models.BooleanField(verbose_name="is_active", default=True)
 
 
 class enrollment(models.Model):
@@ -101,13 +101,14 @@ class enrollment(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
     fecha = models.DateTimeField(auto_now_add=True)
-    paralell = models.ForeignKey(Paralell, on_delete=models.PROTECT)
+    paralell = models.CharField(
+        'paralell', max_length=20, blank=False, null=False)
 
     def __str__(self):
-        return f"{self.student, self.subject, self.teacher}"
+        return f"student: {self.student} / subject:{self.subject.name} / teacher:{self.teacher}"
 
 
-class calification(models.Model):
+class Calification(models.Model):
     n1 = models.IntegerField('n1', default=0)
     n2 = models.IntegerField('n2', default=0)
     n3 = models.IntegerField('n3', default=0)
@@ -120,5 +121,11 @@ class calification(models.Model):
     final = models.IntegerField('final', default=0)
     enroll = models.OneToOneField(enrollment, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        self.p1 = self.n1+self.n2+self.ex1
+        self.p2 = self.n3+self.n4+self.ex2
+        self.final = self.p1+self.p2+self.re
+        super().save(self, *args, **kwargs)
+
     def __str__(self):
-        return f"{self.p1, self.p2, self.final, self.enroll.__str__()}"
+        return f"p1: {self.p1} / p2:{self.p2} / final:{self.final} / enroll:{ self.enroll.__str__()}"

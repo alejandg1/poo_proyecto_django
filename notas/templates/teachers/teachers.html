@@ -34,6 +34,7 @@
     <table class="table table-borderless table-fluid">
       <thead class="text-center text-light">
         <tr>
+          <th>Foto</th>
           <th>Grado académico</th>
           <th>Nombres</th>
           <th>Apellidos</th>
@@ -44,6 +45,7 @@
         {% for teacher in teachers %}
 
         <tr>
+          <td>{{teacher.photo}}</td>
           <td>{{teacher.firstname|upper}}</td>
           <td>{{teacher.lastname|upper}}</td>
 
