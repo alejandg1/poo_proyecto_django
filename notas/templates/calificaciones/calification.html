@@ -32,6 +32,7 @@
      <table class="table table-borderless table-fluid">
     <thead class="text-center text-light ">
       <tr > 
+<<<<<<< HEAD
         <th>estudiante</th>
         <th>materia</th>
         <th>profesor</th>
@@ -46,12 +47,23 @@
         <th>re</th>
         <th>final</th>
         <th>acciones</th>
+=======
+        <th>Estudiante</th>
+        <th>Materia</th>
+        <th>Profesor</th>
+        <th>P1</th>
+        <th>P2</th>
+        <th>Recuperación</th>
+        <th>Final</th>
+        <th>Acciones</th>
+>>>>>>> main
       </tr>
     </thead>
     <tbody>
       {% for calificacion in calificaciones %}
       
       <tr>
+<<<<<<< HEAD
         <td>{{calificacion.enroll.student|upper}}</td>
         <td>{{calificacion.enroll.subject|upper}}</td>
         <td>{{calificacion.enroll.teacher|upper}}</td>
@@ -64,9 +76,18 @@
         <td>{{calificacion.ex2}}</td>
         <td>{{calificacion.re}}</td>
         <td>{{calificacion.final}}</td>
+=======
+        <td style="text-align: center;">{{calificacion.enroll.student|upper}}</td>
+        <td style="text-align: center;">{{calificacion.enroll.subject|upper}}</td>
+        <td style="text-align: center;">{{calificacion.enroll.teacher|upper}}</td>
+        <td style="text-align: center;">{{calificacion.p1}}</td>
+        <td style="text-align: center;">{{calificacion.p2}}</td>
+        <td style="text-align: center;">{{calificacion.re}}</td>
+        <td style="text-align: center;">{{calificacion.final}}</td>
+>>>>>>> main
 
       
-        <td>
+        <td style="text-align: center;">
           <a href="{% url 'update_calification' calificacion.id %}" data-bs-toggle="tooltip" data-bs-title="Editar calificacion">📝</a>
           <a href="{% url 'delete_calification' calificacion.id %}" data-bs-toggle="tooltip" data-bs-title="Eliminar calificacion">❌</a>
         </td>
@@ -88,7 +109,7 @@
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-                <a class="page-link text-success fw-bold" href="{% url 'calification' %}?page={{ page_num }}">{{ page_num }}</a>
+                <a class="page-link fw-bold" href="{% url 'calification' %}?page={{ page_num }}">{{ page_num }}</a>
             </li>
         {% endfor %}
 
@@ -99,7 +120,7 @@
   {% endif %}
   <div class="m-2">
     <a href="{% url 'create_calification' %}" class="btn color text-white" data-bs-toggle="tooltip" data-bs-title="Ingresar un nueva facultad">
-        registrar calificacion
+        Registrar calificación
     </a>
   </div>
 </div>

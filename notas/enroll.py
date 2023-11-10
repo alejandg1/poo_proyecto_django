@@ -22,7 +22,7 @@ def init(request):
             Enrolls = enrollment.objects.all()
             # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
-        paginator = Paginator(Enrolls, 2)
+        paginator = Paginator(Enrolls, 4)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)
         # Obtén los libros de la página actual

@@ -33,19 +33,19 @@
     <thead class="text-center text-light ">
       <tr > 
         <th>Nombre</th>
-        <th>codigo</th>
-        <th>acciones</th>
+        <th>Código</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       {% for subject in asignaturas %}
       
       <tr>
-        <td>{{subject.name|upper}}</td>
-        <td>{{subject.code|upper}}</td>
+        <td style="text-align: center;">{{subject.name|upper}}</td>
+        <td style="text-align: center;">{{subject.code|upper}}</td>
 
       
-        <td>
+        <td style="text-align: center;">
           <a href="{% url 'update_subject' subject.id %}" data-bs-toggle="tooltip" data-bs-title="Editar asignatura">📝</a>
           <a href="{% url 'delete_subject' subject.id %}" data-bs-toggle="tooltip" data-bs-title="Eliminar asignatura">❌</a>
         </td>
@@ -67,7 +67,11 @@
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
+<<<<<<< HEAD
                 <a class="page-link text-success fw-bold" href="{% url 'subjects' %}?page={{ page_num }}">{{ page_num }}</a>
+=======
+                <a class="page-link fw-bold" href="{% url 'faculty' %}?page={{ page_num }}">{{ page_num }}</a>
+>>>>>>> main
             </li>
         {% endfor %}
 
@@ -78,7 +82,7 @@
   {% endif %}
   <div class="m-2">
     <a href="{% url 'create_subject' %}" class="btn color text-white" data-bs-toggle="tooltip" data-bs-title="Ingresar un nueva asignatura">
-        crear asignatura
+        Crear asignatura
     </a>
   </div>
 </div>

@@ -78,7 +78,7 @@ class Teacher(models.Model):
     lastname = models.CharField(verbose_name="Apellidos", max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     photo = models.ImageField(default='../media/default_photo.png',
-                              upload_to='teacherPhoto', blank=True, null=True)
+                                upload_to='teacherPhoto', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
