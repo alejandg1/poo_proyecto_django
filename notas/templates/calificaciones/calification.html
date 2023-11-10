@@ -32,6 +32,22 @@
      <table class="table table-borderless table-fluid">
     <thead class="text-center text-light ">
       <tr > 
+<<<<<<< HEAD
+        <th>estudiante</th>
+        <th>materia</th>
+        <th>profesor</th>
+        <th>n1</th>
+        <th>n2</th>
+        <th>ex1</th>
+        <th>p1</th>
+        <th>p3</th>
+        <th>p4</th>
+        <th>ex2</th>
+        <th>p2</th>
+        <th>re</th>
+        <th>final</th>
+        <th>acciones</th>
+=======
         <th>Estudiante</th>
         <th>Materia</th>
         <th>Profesor</th>
@@ -40,12 +56,27 @@
         <th>Recuperación</th>
         <th>Final</th>
         <th>Acciones</th>
+>>>>>>> main
       </tr>
     </thead>
     <tbody>
       {% for calificacion in calificaciones %}
       
       <tr>
+<<<<<<< HEAD
+        <td>{{calificacion.enroll.student|upper}}</td>
+        <td>{{calificacion.enroll.subject|upper}}</td>
+        <td>{{calificacion.enroll.teacher|upper}}</td>
+        <td>{{calificacion.n1}}</td>
+        <td>{{calificacion.n2}}</td>
+        <td>{{calificacion.ex1}}</td>
+        <td>{{calificacion.p1}}</td>
+        <td>{{calificacion.n3}}</td>
+        <td>{{calificacion.n4}}</td>
+        <td>{{calificacion.ex2}}</td>
+        <td>{{calificacion.re}}</td>
+        <td>{{calificacion.final}}</td>
+=======
         <td style="text-align: center;">{{calificacion.enroll.student|upper}}</td>
         <td style="text-align: center;">{{calificacion.enroll.subject|upper}}</td>
         <td style="text-align: center;">{{calificacion.enroll.teacher|upper}}</td>
@@ -53,6 +84,7 @@
         <td style="text-align: center;">{{calificacion.p2}}</td>
         <td style="text-align: center;">{{calificacion.re}}</td>
         <td style="text-align: center;">{{calificacion.final}}</td>
+>>>>>>> main
 
       
         <td style="text-align: center;">
@@ -118,5 +150,3 @@
   </div>
 </div>
 {% endblock content %}
-
-

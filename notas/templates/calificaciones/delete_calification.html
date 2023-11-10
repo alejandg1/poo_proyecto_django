@@ -14,8 +14,8 @@
         <form method="POST" class="m-4"> 
             {% csrf_token %}
             <div>
-                <h2 class="fw-bold text-center mt-3">¿Desea eliminar la facultad?</h2> 
-                <h2 class="fw-bold text-black text-center mt-3">{{calificacion.code}} {{calificacion.name}}</h2>
+                <h2 class="fw-bold text-center mt-3">¿Desea eliminar la calificacion?</h2> 
+                <h2 class="fw-bold text-black text-center mt-3">{{calificacion.enroll.subject.name}} {{calificacion.enroll.student.firstname}} {{calificacion.enroll.student.lastname}}</h2>
                 <div class="mt-4 d-flex justify-content-between flex-wrap">
                     <button class="btn color text-white"  type="submit">Eliminar calificacion</button>
                     <a class="btn botones text-white ml-2" href="/calification/">Cancelar</a>
