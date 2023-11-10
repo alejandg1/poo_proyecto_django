@@ -100,6 +100,7 @@ def update_calification(request, id):
 @ login_required
 def delete_calification(request, id):
     calificacion = None
+
     try:
         calificacion = Calification.objects.get(id=id)
         if request.method == "GET":
