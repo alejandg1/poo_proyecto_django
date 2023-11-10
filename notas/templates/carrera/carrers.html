@@ -43,22 +43,10 @@
       {% for carrera in carreras %}
       
       <tr>
-<<<<<<< HEAD
-        <td>{{carrera.nombre|upper}}</td>
-        <td>{{carrera.codigo_carrera|upper}}</td>
-        <td>{{carrera.Facultad|upper}}</td>
-        <td><ul style="list-style-type: none">
-            {% for materia in carrera.materias.all%}
-            <li>{{materia.name}}</li>
-            {% endfor%}
-
-          </ul></td>
-=======
         <td style="text-align: center;">{{carrera.nombre|upper}}</td>
         <td style="text-align: center;">{{carrera.codigo_carrera|upper}}</td>
         <td style="text-align: center;">{{carrera.Facultad|upper}}</td>
         <td style="text-align: center;">{{carrera.Subjects|upper}}</td>
->>>>>>> main
       
         <td style="text-align: center;">
           <a href="{% url 'update_carrer' carrera.id %}" data-bs-toggle="tooltip" data-bs-title="Editar carrera">📝</a>

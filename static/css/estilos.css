@@ -10,9 +10,19 @@
   background-color: rgb(93, 93, 148)
   
 }
-
-
-
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer{
+  margin-top: auto;
+  margin-bottom: 0;
+  height: 50%;
+}
 .fondo {
   background-color: rgb(212, 212, 212)
 }
@@ -40,7 +50,7 @@
 .pie-pagina{
   width: 100%;
   background-color: #675175;
-  margin-top: 50px;
+  margin-top: 150px;
 
 }
 .pie-pagina .grupo1{
