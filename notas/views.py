@@ -55,8 +55,6 @@ def iniciarSesion(request):
             request,
             username=request.POST['username'],
             password=request.POST['password'])
-        profile = UserProfile.objects.filter(user=user.id)
-        print(profile)
         if user is None:
             context = {'title': 'Iniciar Sesion', 'form': AuthenticationForm,
                        'error': 'Usuario o password incorrecto'}
