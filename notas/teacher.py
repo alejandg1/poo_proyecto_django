@@ -18,7 +18,7 @@ def init(request):
         else:
             teachers = Teacher.objects.all()
         # Crea un paginador con los estudiantes
-        paginator = Paginator(teachers, 2)
+        paginator = Paginator(teachers, 4)
         print(teachers)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)

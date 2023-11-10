@@ -23,7 +23,7 @@ def init(request):
             # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
         print(students)
-        paginator = Paginator(students, 2)
+        paginator = Paginator(students, 4)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)
         # Obtén los libros de la página actual

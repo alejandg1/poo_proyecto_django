@@ -20,7 +20,7 @@ def init(request):
             carrers = Carrer.objects.all()
             # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
-        paginator = Paginator(carrers, 2)
+        paginator = Paginator(carrers, 4)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)
         # Obtén los libros de la página actual

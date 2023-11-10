@@ -32,23 +32,23 @@
      <table class="table table-borderless table-fluid">
     <thead class="text-center text-light ">
       <tr > 
-        <th>Nombre</th>
-        <th>codigo</th>
-        <th>facultad</th>
-        <th>materias</th>
-        <th>acciones</th>
+        <th>Carrera</th>
+        <th>Código</th>
+        <th>Facultad</th>
+        <th>Materias</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       {% for carrera in carreras %}
       
       <tr>
-        <td>{{carrera.nombre|upper}}</td>
-        <td>{{carrera.codigo_carrera|upper}}</td>
-        <td>{{carrera.Facultad|upper}}</td>
-        <td>{{carrera.Subjects|upper}}</td>
+        <td style="text-align: center;">{{carrera.nombre|upper}}</td>
+        <td style="text-align: center;">{{carrera.codigo_carrera|upper}}</td>
+        <td style="text-align: center;">{{carrera.Facultad|upper}}</td>
+        <td style="text-align: center;">{{carrera.Subjects|upper}}</td>
       
-        <td>
+        <td style="text-align: center;">
           <a href="{% url 'update_carrer' carrera.id %}" data-bs-toggle="tooltip" data-bs-title="Editar carrera">📝</a>
           <a href="{% url 'delete_carrer' carrera.id %}" data-bs-toggle="tooltip" data-bs-title="Eliminar carrera">❌</a>
         </td>
@@ -70,7 +70,7 @@
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-                <a class="page-link text-success fw-bold" href="{% url 'faculty' %}?page={{ page_num }}">{{ page_num }}</a>
+                <a class="page-link fw-bold" href="{% url 'carrers' %}?page={{ page_num }}">{{ page_num }}</a>
             </li>
         {% endfor %}
 
@@ -81,7 +81,7 @@
   {% endif %}
   <div class="m-2">
     <a href="{% url 'create_carrer' %}" class="btn color text-white" data-bs-toggle="tooltip" data-bs-title="Ingresar un nueva facultad">
-        crear carrera
+        Crear carrera
     </a>
   </div>
 </div>

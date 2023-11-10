@@ -33,11 +33,11 @@
      <table class="table table-borderless table-fluid">
     <thead class="text-center text-light ">
       <tr > 
-        <th>estudiante</th>
-        <th>materia</th>
-        <th>docente</th>
+        <th>Estudiante</th>
+        <th>Materia</th>
+        <th>Docente</th>
         <th>Fecha creación</th>
-        <th>paralelo</th>
+        <th>Paralelo</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -46,12 +46,12 @@
       
       <tr>
         
-        <td>{{matricula.student.firstname|upper}} {{matricula.student.lastname|upper}}</td>
-        <td>{{matricula.subject.name|upper}}</td>
-        <td>{{matricula.teacher.firstname|upper}} {{matricula.teacher.lastname|upper}}</td>
-        <td>{{matricula.fecha|date:"d/m/y"}}</td>
-        <td>{{matricula.paralell|upper}}</td>
-        <td>
+        <td style="text-align: center;">{{matricula.student.firstname|upper}} {{matricula.student.lastname|upper}}</td>
+        <td style="text-align: center;">{{matricula.subject.name|upper}}</td>
+        <td style="text-align: center;">{{matricula.teacher.firstname|upper}} {{matricula.teacher.lastname|upper}}</td>
+        <td style="text-align: center;">{{matricula.fecha|date:"d/m/y"}}</td>
+        <td style="text-align: center;">{{matricula.paralell|upper}}</td>
+        <td style="text-align: center;">
 
           <a href="{% url 'update_enroll' matricula.id %}" data-bs-toggle="tooltip" data-bs-title="Editar matricula">📝</a>
           <a href="{% url 'delete_enroll' matricula.id %}" data-bs-toggle="tooltip" data-bs-title="Eliminar matricula">❌</a>
@@ -74,7 +74,7 @@
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-                <a class="page-link text-white fw-bold" href="{% url 'enroll' %}?page={{ page_num }}">{{ page_num }}</a>
+                <a class="page-link fw-bold" href="{% url 'enroll' %}?page={{ page_num }}">{{ page_num }}</a>
             </li>
         {% endfor %}
 
