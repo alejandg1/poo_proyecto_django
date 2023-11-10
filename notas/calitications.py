@@ -48,7 +48,7 @@ def init(request):
 def create_calification(request):
     form = None
     if request.method == "GET":
-        context = {'title': 'registrar calificación',
+        context = {'title': 'Registrar calificación',
                    'form': calificationForm(), 'error': ''}
         return render(request, 'calificaciones/create_calification.html', context)
     else:
