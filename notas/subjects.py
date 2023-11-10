@@ -20,7 +20,7 @@ def init(request):
             subjects = Subject.objects.all()
             # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
-        paginator = Paginator(subjects, 2)
+        paginator = Paginator(subjects, 4)
         # Obtén el número de página actual
         pagina = request.GET.get('page', 1)
         # Obtén los libros de la página actual
@@ -109,6 +109,6 @@ def delete_subject(request, id):
     except ValueError:
         print(ValueError)
         context = {'title': 'Datos de la asignatura',
-                   'facultad': subject,
+                   'asignatura': subject,
                    'error': 'Error al eliminar asignaruta'}
         return render(request, 'asignaturas/delete_subject.html', context)

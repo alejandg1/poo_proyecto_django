@@ -44,11 +44,11 @@
         {% for teacher in teachers %}
 
         <tr>
-          <td><img src="{{teacher.photo.url}}" style="width:100px; heigth:100px"></td>
-          <td>{{teacher.firstname|upper}}</td>
-          <td>{{teacher.lastname|upper}}</td>
+          <td style="text-align: center;"><img src="{{teacher.photo.url}}" style="width:50px; heigth:50px"></td>
+          <td style="text-align: center;">{{teacher.firstname|upper}}</td>
+          <td style="text-align: center;">{{teacher.lastname|upper}}</td>
 
-          <td>
+          <td style="text-align: center;">
             {% comment %} {% url 'detail_student' student.id %} {% endcomment %}
 
             {% comment %} {% with student.id as id, student.firstname as nombre, student.lastname as apellido,
@@ -77,7 +77,7 @@
   <ul class="pagination">
     {% for page_num in paginator.page_range %}
     <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-      <a class="page-link text-success fw-bold" href="{% url 'teachers' %}?page={{ page_num }}">{{ page_num }}</a>
+      <a class="page-link fw-bold" href="{% url 'teachers' %}?page={{ page_num }}">{{ page_num }}</a>
     </li>
     {% endfor %}
 
@@ -118,46 +118,4 @@
     </div>
   </div>
 </div>
-
-
-{% comment %} <script>
-  // Escuchar clics en el botón "Mostrar más detalles"
-  document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('show-details')) {
-      event.preventDefault();
-      let student = (event.target.getAttribute('data-studentid'));
-      //"1|miguel|vera"
-      student = student.split("|")
-      console.log(student)
-      let nombre = student[1]
-      let id = parseInt(student[0])
-      console.log(id)
-      let apellido = student[2]
-      // Muestra los detalles en el modal
-      document.getElementById('studentDetailsContent').innerHTML = `
-      <div class="container">
-        <div class="modal-footer d-flex align-items-center justify-content-between">
-          <form action="/students/${id}/" method="POST" class="m-4"> 
-            {% csrf_token %}
-            <div class="row text-center align-content-center flex-column  g-2">
-                
-                <button class="btn btn-outline-success mx-2" type="submit">¿Desea Graduar al Estudiante?</button>
-                <h2>${nombre} ${apellido}<h2>
-                  <button class="btn color text-white mx-2" type="submit">Graduar estudiante</button>
-            </div>
-            
-        </form>
-        </div> 
-      
-      </div>
-      `
-        ;
-
-      // Abre el modal
-      new bootstrap.Modal(document.getElementById('studentDetailsModal')).show(
-
-      );
-    }
-  });
-</script> {% endcomment %}
 {% endblock content %}

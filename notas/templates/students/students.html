@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static%}
 {% block content %}
- <div class="container">
+<div class="container">
     <div class="py-2 mt-4 border border-1 shadow rounded text-center color">
         <h1 class="fw-bold text-white text-success">{{title}}</h1>
     
@@ -12,7 +12,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     {% endif %}  
-   <div class="mt-3">
+    <div class="mt-3">
         <h1 class="text-center fw-bold"></h1>
 
         <div class="mt-2 d-flex justify-content-between flex-wrap">
@@ -29,7 +29,7 @@
   </div>
 
   <div class="table-responsive mt-3">
-     <table class="table table-borderless table-fluid">
+      <table class="table table-borderless table-fluid">
     <thead class="text-center text-light ">
       <tr > 
         <th>Foto</th>
@@ -44,25 +44,25 @@
       {% for student in students %}
       
       <tr>
-        <td><img src="{{student.photo.url}}"style="width:100px; heigth:100px"> </td>
-        <td>{{student.firstname|upper}}</td>
-        <td>{{student.lastname|upper}}</td>
+        <td style="text-align: center;"><img src="{{student.photo.url}}"style="width:50px; heigth:50px"> </td>
+        <td style="text-align: center;">{{student.firstname|upper}}</td>
+        <td style="text-align: center;">{{student.lastname|upper}}</td>
         {% if student.graduate %}
-            <td>{{student.dategraduate|date:'M j Y'}}</td>  
+            <td style="text-align: center;">{{student.dategraduate|date:'M j Y'}}</td>  
         {% else %} 
-            <td></td>
+            <td style="text-align: center;"></td>
         {% endif %}
-        <td>{% if student.graduate %}
+        <td style="text-align: center;">{% if student.graduate %}
               ✔
             {% else %} 
               ➖
             {% endif %}
         </td>  
 
-        <td >
+        <td style="text-align: center;">
           {% comment %} {% url 'detail_student' student.id %} {% endcomment %}
-         
-           {% comment %} {% with student.id as id, student.firstname as nombre, student.lastname as apellido, student.graduate as graduado %}
+          
+            {% comment %} {% with student.id as id, student.firstname as nombre, student.lastname as apellido, student.graduate as graduado %}
             {% endcomment %}
             <a class="show-details" href="#" data-bs-toggle="tooltip" data-bs-title="Graduar Estudiante"
               data-studentid="{{ student.id }}|{{ student.firstname }}|{{ student.lastname }}|{{ student.graduate }}" data-bs-toggle="modal" data-bs-target="#studentDetailsModal">
@@ -75,7 +75,7 @@
       </tr>
       {% empty %}
       <tr>
-         <td colspan="5" class="fw-bold h3 text-center">
+          <td colspan="5" class="fw-bold h3 text-center">
             <div class="py-2 mt-2 border border-1 shadow rounded text-center">
               ¡No se encontraron datos que cumplan los criterios de búsqueda...!
             </div>   
@@ -83,14 +83,14 @@
       </tr>
     {% endfor %}  
     </tbody>
-     </table>
+      </table>
   </div>
 
   {% if paginator.num_pages > 1 %}
     <ul class="pagination">
         {% for page_num in paginator.page_range %}
             <li class="page-item text-danger fw-bold {% if page_num == pagina %}active{% endif %}">
-                <a class="page-link text-white fw-bold" href="{% url 'students' %}?page={{ page_num }}">{{ page_num }}</a>
+                <a class="page-link fw-bold" href="{% url 'students' %}?page={{ page_num }}">{{ page_num }}</a>
             </li>
         {% endfor %}
 
@@ -118,7 +118,7 @@
                 <strong> ¡ {{error}}</strong>, Verifique los datos...!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-         {% endif %} 
+          {% endif %} 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
