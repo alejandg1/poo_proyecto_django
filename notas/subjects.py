@@ -77,7 +77,7 @@ def update_subject(request, id):
     if request.method == "GET":
         form = SubjectForm(instance=subject)
         context = {'title': 'Editar Asignatura', 'form': form, 'error': ''}
-        return render(request, 'facultad/create_subject.html', context)
+        return render(request, 'asignaturas/create_subject.html', context)
     else:
         try:
             form = SubjectForm(request.POST, instance=subject)
@@ -109,6 +109,6 @@ def delete_subject(request, id):
     except ValueError:
         print(ValueError)
         context = {'title': 'Datos de la asignatura',
-                   'facultad': subject,
+                   'asignatura': subject,
                    'error': 'Error al eliminar asignaruta'}
         return render(request, 'asignaturas/delete_subject.html', context)

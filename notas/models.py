@@ -22,7 +22,7 @@ class Faculty(models.Model):
         ordering = ('name',)
 
     def __str__(self):
-        return f"name: {self.name}"
+        return f"{self.name}"
 
 
 class Subject(models.Model):
@@ -120,6 +120,7 @@ class Calification(models.Model):
     re = models.IntegerField('re', default=0)
     final = models.IntegerField('final', default=0)
     enroll = models.OneToOneField(enrollment, on_delete=models.CASCADE)
+    asistencia = models.IntegerField('asistencia', default=0)
 
     def save(self, *args, **kwargs):
         self.p1 = self.n1+self.n2+self.ex1

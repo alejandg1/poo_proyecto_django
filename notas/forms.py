@@ -47,4 +47,5 @@ class Enrollform(ModelForm):
 class calificationForm(ModelForm):
     class Meta:
         model = Calification
-        fields = ['enroll', 'n1', 'n2', 'ex1', 'n3', 'n4', 'ex2', 're']
+        fields = ['enroll', 'n1', 'n2', 'ex1',
+                  'n3', 'n4', 'ex2', 're', 'asistencia']

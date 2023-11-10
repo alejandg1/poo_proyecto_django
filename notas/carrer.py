@@ -18,7 +18,7 @@ def init(request):
                 (Facultad__icontains=query))
         else:
             carrers = Carrer.objects.all()
-            # #  select * from Student  where user=1
+        # #  select * from Student  where user=1
         # Crea un paginador con los estudiantes
         paginator = Paginator(carrers, 2)
         # Obtén el número de página actual
@@ -56,11 +56,6 @@ def create_carrer(request):
             # materias = request.POST['Subjects']
             if form.is_valid():
                 carrer = form.save(commit=False)  # lo tiene en memoria
-                # for materia in materias:
-                #     subjec = Subject.objects.get(id=materia)
-                #     print(subjec)
-                #     Carrer.Subjects.add(subjec)
-
                 carrer.save()  # lo guarda en la BD
                 return redirect('carrers')
             else:
